@@ -76,78 +76,78 @@ print(
     train["record_id"].duplicated().sum()
 )
 
+def find_longest_same_value_run(df, column, *, by_duration=False):
+    """Find the longest run of repeated valid readings in chronological order."""
+    ordered = df.sort_values(["date", "record_id"])
+    readings = ordered[column].tolist()
+    dates = ordered["date"].tolist()
+    best_run = None
+    best_rank = (0, 0)
+    run_start = 0
+
+    for i, value in enumerate(readings):
+        if pd.isna(value) or (column == "sharing" and value == 9999):
+            run_start = i + 1
+            continue
+
+        if i > run_start and value != readings[i - 1]:
+            run_start = i
+
+        rows = i - run_start + 1
+        if rows < 2:
+            continue
+
+        start = date.fromisoformat(dates[run_start])
+        end = date.fromisoformat(dates[i])
+        days = (end - start).days + 1
+        rank = (days, rows) if by_duration else (rows, days)
+        if rank > best_rank:
+            best_rank = rank
+            best_run = {
+                "value": value,
+                "rows": rows,
+                "days": days,
+                "start": start,
+                "end": end,
+            }
+
+    return best_run
+
 
 print("\n--- 5. STUCK SENSOR ---")
 
-records = train[
-    ["date", "record_id", "locality"] + numeric_columns
-].to_dict(orient="records")
-
 best_runs = {}
-
-for locality in train["locality"].unique():
-
-    local_records = sorted(
-        [r for r in records if r["locality"] == locality],
-        key=lambda r: (r["date"], r["record_id"])
-    )
-
-    for col in numeric_columns:
-
-        run_start = 0
-
-        for i in range(1, len(local_records) + 1):
-
-            if (
-                i == len(local_records)
-                or local_records[i][col] != local_records[run_start][col]
-            ):
-
-                count = i - run_start
-
-                start = date.fromisoformat(
-                    local_records[run_start]["date"]
-                )
-
-                end = date.fromisoformat(
-                    local_records[i - 1]["date"]
-                )
-
-                days = (end - start).days + 1
-
-                if (
-                    col not in best_runs
-                    or days > best_runs[col]["days"]
-                ):
-                    best_runs[col] = {
-                        "locality": locality,
-                        "value": local_records[run_start][col],
-                        "rows": count,
-                        "days": days,
-                        "start": start,
-                        "end": end
-                    }
-
-                run_start = i
+for col in numeric_columns:
+    result = find_longest_same_value_run(train, col)
+    if result is not None:
+        best_runs[col] = result
 
 for col, result in best_runs.items():
     print(
         col,
-        "Locality:", result["locality"],
         "Value:", result["value"],
         "Rows:", result["rows"],
         "Days:", result["days"],
         "Start:", result["start"],
-        "End:", result["end"]
+        "End:", result["end"],
     )
 
 longest_run = max(
-    best_runs.values(),
-    key=lambda x: x["days"]
+    best_runs.values(), key=lambda run: (run["rows"], run["days"]), default=None
+)
+if longest_run is None:
+    print("Longest run: no repeated readings")
+else:
+    print("Longest run:", longest_run["days"], "days")
+    print("Longest run rows:", longest_run["rows"])
+
+duration_runs = (
+    find_longest_same_value_run(train, col, by_duration=True) for col in numeric_columns
 )
 
-print("Longest run:", longest_run["days"], "days")
-print("Potential stuck sensor:", longest_run["days"] >= 14)
+max_days = max((run["days"] for run in duration_runs if run is not None), default=0)
+print("Maximum run duration:", max_days, "days")
+print("Potential stuck sensor:", max_days >= 14)
 
 
 print("\n--- 6. TARGET TYPOS ---")
