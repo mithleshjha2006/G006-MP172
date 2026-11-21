@@ -1,50 +1,51 @@
-# MP172 findings --- fill in every value, keep every key.
-# The marking tool reads this file. Write null only where the comment says so.
-# Use the exact column names and group values from your data files.
 
-group_id: "G006"          # your group id, e.g. "G042"
+group_id: "G006"
 problem_id: "MP172"
 
 data_issues:
-  # For each of the 7 kinds: present: true or false.
-  # If present is false, leave the other values as null.
   leaking_column:
     present: true
-    column: rent_in_signed_agreement           # the column that must not be used as a feature
+    column: rent_in_signed_agreement
+
   unit_mixup:
     present: false
-    column: null           # the column recorded in a different unit
-    group_value: null      # the value of locality whose rows are affected
-    factor: null           # wrong value = right value x factor
+    column: null
+    group_value: null
+    factor: null
+
   sentinel_value:
     present: true
     column: sharing
-    value: 9999            # the special number typed instead of a blank
-    count: 35              # how many rows have it
+    value: 9999
+    count: 35
+
   duplicate_rows:
     present: false
-    count: null            # number of EXTRA copies (rows you would delete)
+    count: null
+
   stuck_sensor:
     present: false
     column: null
-    start_date: null       # first date with the stuck value, YYYY-MM-DD
-    end_date: null         # last date with the stuck value, YYYY-MM-DD
+    start_date: null
+    end_date: null
+
   target_typos:
     present: true
-    count: 11              # rows whose target was typed 10 times too big
+    count: 11
+
   spelling_variants:
     present: true
     column: furnishing
-    true_levels: 3         # how many real categories there are after cleaning
+    true_levels: 3
 
 tracking:
-  experiment_name: null
-  best_run_id: null        # the MLflow run id of your v1 model
-  registered_model_name: null
-  champion_version: null
+  experiment_name: "Rental-Price-Prediction"
+  best_run_id: "0229b3c6aacd4a4b92c31bb5c06c379f"
+  registered_model_name: "RentalPricePredictor"
+  champion_version: 1
 
 monitoring:
-  psi:                     # cleaned train.csv vs later.csv, 10 bins
+  psi:
     distance_to_campus_km: null
     room_area_sqft: null
     sharing: null
@@ -52,11 +53,11 @@ monitoring:
     building_age_yr: null
     wifi_mbps: null
   most_drifted_feature: null
-  mae_by_group:            # v1 on later.csv, per value of locality
+  mae_by_group:
     'Sector East': null
     'Sector West': null
     'Market Side': null
   worst_served_group: null
-  mae_v1_on_check: null    # v1 on the last 30% of later.csv (by date)
-  mae_v2_on_check: null    # v2 on the same rows
-  decision: null           # promote or keep
+  mae_v1_on_check: null
+  mae_v2_on_check: null
+  decision: null
