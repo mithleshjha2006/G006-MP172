@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mp172-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mp172-api
+  template:
+    metadata:
+      labels:
+        app: mp172-api
+    spec:
+      containers:
+        - name: mp172-api
+          image: localhost:5000/mp172-rent-api:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MODEL_URI
+              value: /app/models/RentalPricePredictor_champion_v1
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 15

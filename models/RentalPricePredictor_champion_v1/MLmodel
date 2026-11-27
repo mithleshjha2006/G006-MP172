@@ -1,0 +1,45 @@
+artifact_path: mlflow-artifacts:/1/models/m-27bff5c8cf4d40d2968cdf9c25829eef/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.14.2
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.1
+    skops_trusted_types:
+    - numpy.dtype
+    - sklearn.tree._tree.Tree
+is_signature_from_type_hint: false
+mlflow_version: 3.18.0
+model_id: m-27bff5c8cf4d40d2968cdf9c25829eef
+model_size_bytes: 17952637
+model_uuid: m-27bff5c8cf4d40d2968cdf9c25829eef
+prompts: null
+run_id: 0229b3c6aacd4a4b92c31bb5c06c379f
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "distance_to_campus_km", "required": true},
+    {"type": "double", "name": "room_area_sqft", "required": true}, {"type": "double",
+    "name": "sharing", "required": false}, {"type": "double", "name": "meals_per_day",
+    "required": true}, {"type": "double", "name": "building_age_yr", "required": true},
+    {"type": "double", "name": "wifi_mbps", "required": true}, {"type": "string",
+    "name": "furnishing", "required": true}, {"type": "string", "name": "locality",
+    "required": true}, {"type": "double", "name": "month", "required": true}, {"type":
+    "double", "name": "day_of_week", "required": true}, {"type": "double", "name":
+    "day_of_month", "required": true}, {"type": "double", "name": "is_weekend", "required":
+    true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-11-21 14:06:15.838019'

@@ -1,5 +1,7 @@
 
+import json
 import logging
+from datetime import datetime, timezone
 import math
 import os
 import time
@@ -18,12 +20,39 @@ from pydantic import BaseModel, ConfigDict, Field
 # LOGGING CONFIGURATION
 # ==================================================
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s"
-)
+# ==================================================
+# LOGGING CONFIGURATION
+# ==================================================
+
+class JSONFormatter(logging.Formatter):
+
+    def format(self, record):
+
+        log_data = {
+            "timestamp": datetime.fromtimestamp(
+                record.created, tz=timezone.utc
+            ).isoformat(),
+            "level": record.levelname,
+            "logger": record.name,
+            "message": record.getMessage()
+        }
+
+        if record.exc_info:
+            log_data["exception"] = self.formatException(
+                record.exc_info
+            )
+
+        return json.dumps(log_data)
+
+
+handler = logging.StreamHandler()
+handler.setFormatter(JSONFormatter())
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.handlers.clear()
+logger.addHandler(handler)
+logger.propagate = False
 
 
 # ==================================================
