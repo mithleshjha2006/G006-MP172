@@ -1,0 +1,90 @@
+{
+  "dataframe_split": {
+    "columns": [
+      "distance_to_campus_km",
+      "room_area_sqft",
+      "sharing",
+      "meals_per_day",
+      "building_age_yr",
+      "wifi_mbps",
+      "furnishing",
+      "locality",
+      "month",
+      "day_of_week",
+      "day_of_month",
+      "is_weekend"
+    ],
+    "data": [
+      [
+        3.07,
+        365.0,
+        3.0,
+        3.0,
+        15.0,
+        280.0,
+        "full",
+        "Market Side",
+        1.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      [
+        11.44,
+        362.0,
+        2.0,
+        0.0,
+        4.0,
+        274.0,
+        "semi",
+        "Market Side",
+        1.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      [
+        9.1,
+        374.0,
+        1.0,
+        2.0,
+        31.0,
+        280.0,
+        "full",
+        "Sector East",
+        1.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      [
+        9.39,
+        241.0,
+        4.0,
+        1.0,
+        12.0,
+        287.0,
+        "full",
+        "Sector East",
+        1.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      [
+        11.77,
+        295.0,
+        1.0,
+        1.0,
+        20.0,
+        294.0,
+        "full",
+        "Sector East",
+        1.0,
+        4.0,
+        2.0,
+        0.0
+      ]
+    ]
+  }
+}
