@@ -1,0 +1,26 @@
+{
+    "psi": {
+        "distance_to_campus_km": 0.022935226106738205,
+        "room_area_sqft": 0.02680965977471541,
+        "sharing": 0.033262484738291576,
+        "meals_per_day": 0.02444309287993114,
+        "building_age_yr": 0.041761183971502046,
+        "wifi_mbps": 7.378296295319006,
+        "rent_in_signed_agreement": 2.44229133907123,
+        "rent_rs": 2.248870948488979
+    },
+    "most_drifted_feature": "wifi_mbps",
+    "mae_by_locality": {
+        "Market Side": 3264.996396582224,
+        "Sector East": 11466.395252293209,
+        "Sector West": 4484.73401733227
+    },
+    "worst_served_locality": "Sector East",
+    "mae_v1_last30": 7179.57955469109,
+    "mae_v2_last30": 2141.650430530171,
+    "improvement_percent": 70.17025280915188,
+    "promotion_decision": "promote_v2",
+    "v2_version": 2,
+    "v2_registry_version": 3,
+    "champion_version": 3
+}

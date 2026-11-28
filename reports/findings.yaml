@@ -1,6 +1,5 @@
-
-group_id: "G006"
-problem_id: "MP172"
+group_id: G006
+problem_id: MP172
 
 data_issues:
   leaking_column:
@@ -39,25 +38,34 @@ data_issues:
     true_levels: 3
 
 tracking:
-  experiment_name: "Rental-Price-Prediction"
-  best_run_id: "0229b3c6aacd4a4b92c31bb5c06c379f"
-  registered_model_name: "RentalPricePredictor"
-  champion_version: 1
+  experiment_name: Rental-Price-Prediction-Stage4
+  best_run_id: b6ea0ad365ed452eb1aed32bd092cd02
+  registered_model_name: RentalPricePredictor
+  champion_version: 3
 
 monitoring:
   psi:
-    distance_to_campus_km: null
-    room_area_sqft: null
-    sharing: null
-    meals_per_day: null
-    building_age_yr: null
-    wifi_mbps: null
-  most_drifted_feature: null
+    distance_to_campus_km: 0.022935226106738205
+    room_area_sqft: 0.02680965977471541
+    sharing: 0.033262484738291576
+    meals_per_day: 0.02444309287993114
+    building_age_yr: 0.041761183971502046
+    wifi_mbps: 7.378296295319006
+    rent_in_signed_agreement: 2.44229133907123
+    rent_rs: 2.248870948488979
+
+  most_drifted_feature: wifi_mbps
+
   mae_by_group:
-    'Sector East': null
-    'Sector West': null
-    'Market Side': null
-  worst_served_group: null
-  mae_v1_on_check: null
-  mae_v2_on_check: null
-  decision: null
+    Sector East: 11466.395252293209
+    Sector West: 4484.73401733227
+    Market Side: 3264.996396582224
+
+  worst_served_group: Sector East
+  mae_v1_on_check: 7179.57955469109
+  mae_v2_on_check: 2141.650430530171
+  decision: promote_v2
+  v2_version: 2
+  v2_registry_version: 3
+  champion_version: 3
+  mae_improvement_percent: 70.17025280915188
