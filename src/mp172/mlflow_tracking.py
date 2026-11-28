@@ -1,13 +1,10 @@
-
 import os
 import mlflow
 
-
 EXPERIMENT_NAME = "Rental-Price-Prediction"
-
 REGISTERED_MODEL_NAME = "RentalPricePredictor"
 
-DEFAULT_TRACKING_URI = "http://127.0.0.1:5000"
+DEFAULT_TRACKING_URI = "sqlite:///mlflow.db"
 
 
 def configure_mlflow(tracking_uri=None):
@@ -17,13 +14,9 @@ def configure_mlflow(tracking_uri=None):
         DEFAULT_TRACKING_URI
     )
 
-    # Configure experiment tracking
     mlflow.set_tracking_uri(uri)
-
-    # Configure model registry
     mlflow.set_registry_uri(uri)
 
-    # Create or select experiment
     experiment = mlflow.set_experiment(EXPERIMENT_NAME)
 
     return experiment

@@ -1,0 +1,25 @@
+{
+  "registered_model_name": "RentalPricePredictor",
+  "alias": "champion",
+  "registry_version": 3,
+  "run_id": "b6ea0ad365ed452eb1aed32bd092cd02",
+  "model_uri": "models:/RentalPricePredictor@champion",
+  "model_file": "models/model.joblib",
+  "expected_input_columns": [
+    "distance_to_campus_km",
+    "room_area_sqft",
+    "sharing",
+    "meals_per_day",
+    "building_age_yr",
+    "wifi_mbps",
+    "furnishing",
+    "locality",
+    "month",
+    "day_of_week",
+    "day_of_month",
+    "is_weekend"
+  ],
+  "exported_at_utc": "2026-11-28T12:07:16.312542+00:00",
+  "python_version": "3.14.2",
+  "scikit_learn_version": "1.9.1"
+}
